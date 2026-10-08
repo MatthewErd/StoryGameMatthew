@@ -1,1 +1,56 @@
 <!-- Add your index page here -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>The Mystery House</title>
+</head>
+<body>
+
+<header>
+    <h1>The Mystery House</h1>
+    <p>The goal is to find the secret inside the Mystery House</p>
+    
+</header>
+
+<main>
+
+    <p>You receive a note telling you to go an abandoned house. </p>
+
+    <form action="game.html" method="get">
+
+        <label for="name">Your Name:</label>
+        <input type="text" id="name" name="name" placeholder="Enter your name" required>
+
+        <br><br>
+
+        <label for="location">Where do you start?</label>
+        <select id="location" name="location">
+            <option value="door">Front Door</option>
+            <option value="yard">Front Yard</option>
+            <option value="window">Window</option>
+        </select>
+
+        <p>Choose your difficulty:</p>
+
+        <input type="radio" id="easy" name="difficulty" value="easy">
+        <label for="brave">Brave</label>
+
+        <input type="radio" id="medium" name="difficulty" value="medium">
+        <label for="careful">Careful</label>
+
+        <input type="radio" id="hard" name="difficulty" value="hard">
+        <label for="curious">Curious</label>
+
+        <br><br>
+
+        <button type="submit">Enter the House</button>
+
+    </form>
+
+    <br>
+
+    <a href="about.html">About Me</a>
+</main>
+
+</body>
+</html>

@@ -1,4 +1,3 @@
-
 // --------------------------------------------------
 // SCENES
 // Read through the comments below to see what this section does
@@ -10,27 +9,31 @@
 // --------------------------------------------------
 
 // First, we create a variable for the current scene being displayed
-let currentScene = "backyard";
+let currentScene = "The Mystery House";
 
 // Then, we create an object that stores the data for each scene,
 const scenes = {
   // See "backyard" for the first example
-  backyard: {
-    title: "Location: Backyard",
-    character: "Interviewee:Grandma",
-    text: "Text: well what I remember happening is that Darcie went inside to play with her pretend kitchen, I heard her neighbor mention he was really hungry, and the dog ran around really quickly",
-    // you can choose how many choices to include
+  "The Mystery House": {
+    title: "Location: The Mystery House",
+    img: "https://www.magnific.com/free-photos-vectors/mystery-house.jpg",
     // each choice can have text, an action, and/or nextScene
     choices: [
       {
-        text: "Chase after the dog (-10 HP)",
+        text: "Examine the front door",
         action: function () {
-          updateHealth(-10);
-        },
-        nextScene: "entrance"
-      },
+          unlookDoor();
+          if inventory contains "key"
+          updateScene("solution");
+          else: "The door is locked."
+        }
+        nextScene: "Front Yard"
+      }
       {
-        text: "Ask about the neighbor",
+        text: "Move the rock"
+        text: "Search around the house"
+        text: "Go back to the front door"
+        
         nextScene: "hallway"
       },
       {
@@ -45,7 +48,7 @@ const scenes = {
 
   entrance: {
     title: "Location: Entrance",
-    character: "Interviewee:Neighbor",
+    character: "Interviewee: Neighbor",
     text: "well what I remember...",
     choices: [
       {

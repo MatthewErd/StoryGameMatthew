@@ -9,39 +9,29 @@
 // --------------------------------------------------
 
 // First, we create a variable for the current scene being displayed
-let currentScene = "The Mystery House";
+let currentScene = "prologue";
 
 // Then, we create an object that stores the data for each scene,
 const scenes = {
   // See "backyard" for the first example
-  "The Mystery House": {
+  prologue: {
     title: "Location: The Mystery House",
     img: "https://www.magnific.com/free-photos-vectors/mystery-house.jpg",
     // each choice can have text, an action, and/or nextScene
+    text: "You receive a strange note telling you to go to an old house at the edge of town. The note says that something important is hidden inside, but it does not explain what it is. When you arrive, the house looks abandoned. The windows are dark and the front door is locked. You notice a small light coming from one of the upstairs windows.",
+
     choices: [
       {
         text: "Examine the front door",
-        action: function () {
-          unlookDoor();
-          if inventory contains "key"
-          updateScene("solution");
-          else: "The door is locked."
-        }
-        nextScene: "Front Yard"
-      }
-      {
-        text: "Move the rock"
-        text: "Search around the house"
-        text: "Go back to the front door"
-        
-        nextScene: "hallway"
+        nextScene: "frontDoor"
       },
       {
-          text: "Pick up the brass key",
-          action: function () {
-            pickUpItem("brass key");
-          },
-          nextScene: "hallway"
+        text: "search the yard",
+        nextScene: "yard"
+      },
+      {
+        text: "Look through the window",
+        nextScene: "porch"
       }
     ]
   },
@@ -55,9 +45,60 @@ const scenes = {
         text: "Ask about the dog",
         nextScene: "backyard"
       },
-         {
+      {
         text: "Ask about the neighbor",
         nextScene: "hallway"
+      }
+    ]
+  },
+
+  frontDoor: {
+    title: "Location: Front Door",
+    text: "You stand in front of the old wooden door. The handle is covered in dust.",
+    choices: [
+      {
+        text: "Try to open the door",
+        action: unlockDoor
+      },
+      {
+        text: "Go back",
+        nextScene: "prologue"
+      }
+    ]
+  },
+
+  yard: {
+    title: "Location: Yard",
+    text: "You search the yard and find an old wooden box underneath a pile of leaves.",
+    choices: [
+      {
+        text: "Pick up the brass key",
+        action: function () {
+          pickUpItem("brass key");
+        },
+        nextScene: "prologue"
+      }
+    ]
+  },
+
+  porch: {
+    title: "Location: Porch",
+    text: "You peer through the dusty window, but it's too dark to see much inside.",
+    choices: [
+      {
+        text: "Go back",
+        nextScene: "prologue"
+      }
+    ]
+  },
+
+  backyard: {
+    title: "Backyard",
+    text: "You head around to the backyard.",
+    choices: [
+      {
+        text: "Return to entrance",
+        nextScene: "entrance"
       }
     ]
   },
@@ -73,7 +114,7 @@ const scenes = {
     ]
   },
 
-   lockedDoor: {
+  lockedDoor: {
     title: "The Locked Door",
     text: "The door handle doesn't move.",
     choices: [
@@ -88,10 +129,9 @@ const scenes = {
     ]
   },
 
-   solution: {
+  solution: {
     title: "The solution",
-    text: "You solved the mystery!",
-    
+    text: "You solved the mystery!"
   }
 };
 
@@ -114,6 +154,7 @@ const sceneTitle = document.getElementById("scene-title");
 const sceneText = document.getElementById("scene-text");
 const choicesContainer = document.getElementById("choices-container");
 const characterName = document.getElementById("character-name");
+const sceneImg = document.getElementById("scene-img");
 
 // Then, we create a function to update the scene,
 function updateScene(sceneName) {
@@ -128,7 +169,19 @@ function updateScene(sceneName) {
   // the appropriate text from the scene object
   sceneTitle.textContent = scene.title;
   sceneText.textContent = scene.text;
-  characterName.textContent = scene.character;
+  
+  if (characterName) {
+    characterName.textContent = scene.character || "";
+  }
+
+  if (sceneImg) {
+    if (scene.img) {
+      sceneImg.src = scene.img;
+      sceneImg.style.display = "block";
+    } else {
+      sceneImg.style.display = "none";
+    }
+  }
 
   // Clear the old buttons before creating new ones
   choicesContainer.innerHTML = "";
@@ -176,7 +229,9 @@ const healthDisplay = document.getElementById("health-display");
 // Create a function to update health 
 function updateHealth(amount) {
   health += amount;
-  healthDisplay.textContent = health;
+  if (healthDisplay) {
+    healthDisplay.textContent = health;
+  }
 }
 
 // This refreshes the health display
@@ -200,8 +255,15 @@ const messageDisplay = document.getElementById("message-display");
 function pickUpItem(itemName) {
     // Add itemName to the inventory array
     // Show the updated inventory on the page
-  inventory.push(itemName);
-  inventoryDisplay.textContent = inventory.join(", ");
+  if (!inventory.includes(itemName)) {
+    inventory.push(itemName);
+  }
+  if (inventoryDisplay) {
+    inventoryDisplay.textContent = inventory.join(", ");
+  }
+  if (messageDisplay) {
+    messageDisplay.textContent = `Item gained: ${itemName}`;
+  }
 }
 
 // --------------------------------------------------
@@ -218,4 +280,3 @@ function unlockDoor() {
     messageDisplay.textContent = "The door is locked.";
   }
 }
-

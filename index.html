@@ -1,8 +1,32 @@
-<!-- Add your index page here -->
 <!DOCTYPE html>
 <html>
 <head>
     <title>The Mystery House</title>
+    <style>
+        body {
+            background-color: white;
+            color: black;
+            font-family: sans-serif;
+            margin: 2em;
+        }
+
+        h1 {
+            color: blue;
+        }
+
+        form {
+            border: 2px solid gray;
+            padding: 1em;
+        }
+
+        label {
+            font-weight: bold;
+        }
+
+        a {
+            color: blue;
+        }
+    </style>
 </head>
 <body>
 
@@ -16,6 +40,7 @@
 
     <p>You receive a note telling you to go an abandoned house. </p>
 
+    <!-- Add your index page here -->
     <form action="game.html" method="get">
 
         <label for="name">Your Name:</label>
@@ -33,13 +58,13 @@
         <p>Choose your difficulty:</p>
 
         <input type="radio" id="easy" name="difficulty" value="easy">
-        <label for="brave">Brave</label>
+        <label for="easy">Brave</label>
 
         <input type="radio" id="medium" name="difficulty" value="medium">
-        <label for="careful">Careful</label>
+        <label for="medium">Careful</label>
 
         <input type="radio" id="hard" name="difficulty" value="hard">
-        <label for="curious">Curious</label>
+        <label for="hard">Curious</label>
 
         <br><br>
 

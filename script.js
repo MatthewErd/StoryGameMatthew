@@ -16,17 +16,14 @@ const scenes = {
   // See "backyard" for the first example
   prologue: {
     title: "Location: The Mystery House",
-    img: "https://www.magnific.com/free-photos-vectors/mystery-house.jpg",
-    // each choice can have text, an action, and/or nextScene
     text: "You receive a strange note telling you to go to an old house at the edge of town. The note says that something important is hidden inside, but it does not explain what it is. When you arrive, the house looks abandoned. The windows are dark and the front door is locked. You notice a small light coming from one of the upstairs windows.",
-
     choices: [
       {
         text: "Examine the front door",
         nextScene: "frontDoor"
       },
       {
-        text: "search the yard",
+        text: "Search the yard",
         nextScene: "yard"
       },
       {
@@ -36,47 +33,35 @@ const scenes = {
     ]
   },
 
-  entrance: {
-    title: "Location: Entrance",
-    character: "Interviewee: Neighbor",
-    text: "well what I remember...",
-    choices: [
-      {
-        text: "Ask about the dog",
-        nextScene: "backyard"
-      },
-      {
-        text: "Ask about the neighbor",
-        nextScene: "hallway"
-      }
-    ]
-  },
-
-  frontDoor: {
-    title: "Location: Front Door",
-    text: "You stand in front of the old wooden door. The handle is covered in dust.",
-    choices: [
-      {
-        text: "Try to open the door",
-        action: unlockDoor
-      },
-      {
-        text: "Go back",
-        nextScene: "prologue"
-      }
-    ]
-  },
-
   yard: {
-    title: "Location: Yard",
-    text: "You search the yard and find an old wooden box underneath a pile of leaves.",
+    title: "Location: Front Yard",
+    text: "You search the yard and find an old wooden box underneath a pile of leaves. The box is locked, but there is a small piece of paper next to it. The paper says: \"The key is closer than you think.\" You look around and notice something shiny underneath a nearby rock.",
     choices: [
       {
-        text: "Pick up the brass key",
+        text: "Move the rock",
         action: function () {
-          pickUpItem("brass key");
+          pickUpItem("Rusty Key");
         },
-        nextScene: "prologue"
+        nextScene: "yardWithKey"
+      },
+      {
+        text: "Search around the house",
+        nextScene: "porch"
+      },
+      {
+        text: "Go back to the front door",
+        nextScene: "frontDoor"
+      }
+    ]
+  },
+
+  yardWithKey: {
+    title: "Location: Front Yard",
+    text: "You find a small rusty key. You put it in your inventory.",
+    choices: [
+      {
+        text: "Go to the front door",
+        nextScene: "frontDoor"
       }
     ]
   },
@@ -92,46 +77,149 @@ const scenes = {
     ]
   },
 
-  backyard: {
-    title: "Backyard",
-    text: "You head around to the backyard.",
+  frontDoor: {
+    title: "Location: Front Door",
+    text: "You stand in front of the old wooden door. The handle is covered in dust.",
     choices: [
       {
-        text: "Return to entrance",
-        nextScene: "entrance"
-      }
-    ]
-  },
-
-  hallway: {
-    title: "The Hallway",
-    text: "The hallway is dark and silent.",
-    choices: [
-      {
-        text: "backyard",
-        nextScene: "lockedDoor"
-      }
-    ]
-  },
-
-  lockedDoor: {
-    title: "The Locked Door",
-    text: "The door handle doesn't move.",
-    choices: [
-      {
-        text: "Try to open it",
-        action: unlockDoor
+        text: "Try to open the door",
+        action: unlockFrontDoor
       },
       {
-        text: "Go back",
-        nextScene: "backyard"
+        text: "Examine the lock",
+        action: function() {
+          if (messageDisplay) {
+            messageDisplay.textContent = "The lock is old and rusted.";
+          }
+        }
+      },
+      {
+        text: "Go back to the yard",
+        nextScene: "yard"
       }
     ]
   },
 
-  solution: {
-    title: "The solution",
-    text: "You solved the mystery!"
+  livingRoom: {
+    title: "Location: Living Room",
+    text: "You enter the house and find yourself in a dark living room. There is an old couch, a bookshelf, and a painting hanging on the wall. You notice that the painting looks like it has been moved recently.",
+    choices: [
+      {
+        text: "Examine the painting",
+        nextScene: "paintingScene"
+      },
+      {
+        text: "Search the bookshelf",
+        action: function() {
+          if (messageDisplay) {
+            messageDisplay.textContent = "The bookshelf is filled with old books.";
+          }
+        }
+      },
+      {
+        text: "Go to the kitchen",
+        nextScene: "kitchen"
+      }
+    ]
+  },
+
+  paintingScene: {
+    title: "Location: Living Room",
+    text: "You move the painting and find a small note hidden behind it. The note says: \"The truth is hidden below.\" You realize there may be something hidden in the basement.",
+    choices: [
+      {
+        text: "Go to the kitchen",
+        nextScene: "kitchen"
+      },
+      {
+        text: "Search for the basement",
+        nextScene: "basement"
+      }
+    ]
+  },
+
+  kitchen: {
+    title: "Location: Kitchen",
+    text: "You walk into the kitchen. Most of the cabinets are empty, but one cabinet is locked. You notice a strange symbol carved into the cabinet door.",
+    choices: [
+      {
+        text: "Search the cabinets",
+        action: function () {
+          pickUpItem("Flashlight");
+        },
+        nextScene: "kitchenWithFlashlight"
+      },
+      {
+        text: "Go back to living room",
+        nextScene: "livingRoom"
+      }
+    ]
+  },
+
+  kitchenWithFlashlight: {
+    title: "Location: Kitchen",
+    text: "You search the cabinets and find an old flashlight. The flashlight still works, but its battery is almost dead.",
+    choices: [
+      {
+        text: "Search for the basement",
+        nextScene: "basement"
+      }
+    ]
+  },
+
+  basement: {
+    title: "Location: Basement",
+    text: "You find the basement door underneath the stairs. It is completely dark. You turn on your flashlight and slowly walk downstairs. At the bottom, you find several old boxes and a desk. On the desk is a photograph of the house. There is a red circle around one of the rooms in the photograph.",
+    choices: [
+      {
+        text: "Search the desk",
+        action: function () {
+          pickUpItem("Basement Key");
+        },
+        nextScene: "basementWithKey"
+      }
+    ]
+  },
+
+  basementWithKey: {
+    title: "Location: Basement",
+    text: "You search the desk and find another key. You notice a locked door at the other end of the basement.",
+    choices: [
+      {
+        text: "Go to the locked room",
+        nextScene: "lockedRoom"
+      }
+    ]
+  },
+
+  lockedRoom: {
+    title: "Location: Locked Room",
+    text: "You walk toward the locked room. There is a small keyhole underneath a strange symbol.",
+    choices: [
+      {
+        text: "Unlock the door",
+        action: unlockBasementDoor
+      },
+      {
+        text: "Leave the house",
+        nextScene: "ending2"
+      }
+    ]
+  },
+
+  ending1: {
+    title: "Ending: Solve the Mystery",
+    text: "You read through the notes and discover that the person who lived in the house disappeared years ago. The final note explains that they hid evidence of what happened inside the house because they were afraid someone would find it. You have solved the mystery."
+  },
+
+  ending2: {
+    title: "Ending: Leave the House",
+    text: "You become uncomfortable with what you have discovered. You decide that you have seen enough and leave the house. The mystery remains unsolved."
+  },
+
+  ending3: {
+    title: "Ending: Trapped",
+    text: "You enter the locked room without paying attention to the door behind you. Suddenly, the door closes and locks. You search for another exit but cannot find one. You are trapped inside the mysterious room."
   }
 };
 
@@ -187,23 +275,25 @@ function updateScene(sceneName) {
   choicesContainer.innerHTML = "";
 
   // Loop through each choice in the scene, connecting an action and nextScene if included
-  scene.choices.forEach(function (choice) {
-    const button = document.createElement("button");
+  if (scene.choices) {
+    scene.choices.forEach(function (choice) {
+      const button = document.createElement("button");
 
-    button.textContent = choice.text;
+      button.textContent = choice.text;
 
-    button.addEventListener("click", function () {
-      if (choice.action) {
-        choice.action();
-      }
+      button.addEventListener("click", function () {
+        if (choice.action) {
+          choice.action();
+        }
 
-      if (choice.nextScene) {
-        updateScene(choice.nextScene);
-      }
+        if (choice.nextScene) {
+          updateScene(choice.nextScene);
+        }
+      });
+
+      choicesContainer.appendChild(button);
     });
-
-    choicesContainer.appendChild(button);
-  });
+  }
 }
 
 // This updates the screen with the current scene
@@ -273,10 +363,20 @@ function pickUpItem(itemName) {
 // --------------------------------------------------
 
 // Create a function that checks if the inventory contains one item and if so shows the win condition scene.
-function unlockDoor() {
-  if (inventory.includes("brass key")) {
-    updateScene("solution");
+function unlockFrontDoor() {
+  if (inventory.includes("Rusty Key")) {
+    messageDisplay.textContent = "The key fits perfectly into the lock. You turn it and the door slowly opens.";
+    updateScene("livingRoom");
   } else {
-    messageDisplay.textContent = "The door is locked.";
+    messageDisplay.textContent = "The door is locked. You need to find a key before you can enter.";
+  }
+}
+
+function unlockBasementDoor() {
+  if (inventory.includes("Basement Key")) {
+    messageDisplay.textContent = "You put the key into the lock. The door opens.";
+    updateScene("ending1");
+  } else {
+    messageDisplay.textContent = "The door will not open. You need to find the key before you can discover what is inside.";
   }
 }

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>The Mystery House - Game</title>
     <script src="script.js" defer></script>
     <style>
         body {
@@ -23,10 +23,29 @@
             display: inline;
         }
 
-        main {
+        /* Header class with 4 distinct properties */
+        .header-box {
             border: 2px solid gray;
             padding: 1em;
-            margin-top: 1em;
+            background-color: #f0f0f0;
+            text-align: left;
+        }
+
+        /* Card class for divs/sections */
+        .card {
+            border: 2px solid gray;
+            padding: 1em;
+            background-color: lightgray;
+            text-align: left;
+            margin-bottom: 1em;
+        }
+
+        /* ID selector with at least 4 distinct properties */
+        #inventory-display {
+            font-weight: bold;
+            color: darkgreen;
+            background-color: #e2e8f0;
+            padding: 5px;
         }
 
         h1 {
@@ -39,7 +58,7 @@
     </style>
 </head>
 <body>
-    <header>
+    <header class="header-box">
       <nav>
             <ul> 
                 <li><a href="index.html">Home</a></li>
@@ -53,8 +72,8 @@
         </nav>
     </header>
 
-    <main>
-    <header>
+    <main class="card">
+    <header class="card">
         <h1 id="scene-title">  </h1>
         <h2 id="character-name">  </h2>
     </header>

@@ -4,37 +4,56 @@
     <title>The Mystery House</title>
     <style>
         body {
-            background-color: white;
-            color: black;
+            background-color: #121212;
+            color: #e0e0e0;
             font-family: sans-serif;
             margin: 2em;
         }
 
         .header {
-            border: 2px solid gray;
+            border: 2px solid #8b0000;
             padding: 1em;
+            background-color: #1a1a1a;
         }
 
         h1 {
-            color: blue;
+            color: #ff4d4d;
             font-size: 2em;
             text-decoration: underline;
+            text-shadow: 1px 1px 2px black;
         }
 
         .card {
-            border: 2px solid gray;
+            border: 2px solid #444;
             padding: 1em;
-            background-color: lightgray;
+            background-color: #1a1a1a;
             width: 300px;
+        }
+
+        #special-intro {
+            color: #ff6b6b;
         }
 
         label {
             font-weight: bold;
+            color: #e0e0e0;
         }
 
         a {
-            color: blue;
+            color: #ff6b6b;
             font-weight: bold;
+        }
+
+        button {
+            background-color: #8b0000;
+            color: white;
+            border: 1px solid #ff4d4d;
+            padding: 8px 12px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #cc0000;
         }
     </style>
 </head>
@@ -49,7 +68,6 @@
 
     <p id="special-intro">You receive a note telling you to go an abandoned house.</p>
 
-    <!-- Add your index page here -->
     <form class="card" action="game.html" method="get">
 
         <label for="name">Your Name:</label>

@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Pixel Illustration</title>
+  <style>
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      display: grid;
+      place-items: center;
+      background: #222;
+    }
+
+    .art {
+      position: relative;
+      width: 326px;
+      height: 406px;
+      background: #ffff59;
+      overflow: hidden;
+    }
+
+    /* White upper panels */
+    .panel {
+      position: absolute;
+      top: 24px;
+      width: 120px;
+      height: 120px;
+      background: #fff;
+    }
+
+    .panel.left { left: 24px; }
+    .panel.right { left: 154px; }
+
+    .panel::after {
+      content: "";
+      position: absolute;
+      top: 24px;
+      left: 24px;
+      width: 48px;
+      height: 48px;
+      background: #000;
+    }
+
+    /* Main black shape */
+    .main {
+      position: absolute;
+      top: 168px;
+      left: 24px;
+      width: 264px;
+      height: 192px;
+      background: #000;
+    }
+
+    /* White notches along its top */
+    .notch {
+      position: absolute;
+      top: 23px;
+      width: 25px;
+      height: 25px;
+      background: #fff;
+    }
+
+    .notch:nth-child(1) { left: 13px; }
+    .notch:nth-child(2) { left: 46px; }
+    .notch:nth-child(3) { left: 79px; }
+    .notch:nth-child(4) { left: 112px; }
+    .notch:nth-child(5) { left: 145px; }
+    .notch:nth-child(6) { left: 178px; }
+    .notch:nth-child(7) { left: 211px; }
+
+    /* Red stepped block */
+    .red {
+      position: absolute;
+      left: 72px;
+      bottom: 2px;
+      width: 120px;
+      height: 85px;
+      background: #f52d20;
+    }
+
+    .red::after {
+      content: "";
+      position: absolute;
+      left: 56px;
+      top: 0;
+      width: 64px;
+      height: 68px;
+      background: #f52d20;
+    }
+  </style>
+</head>
+<body>
+  <div class="art" aria-label="Abstract pixel-art illustration">
+    <div class="panel left"></div>
+    <div class="panel right"></div>
+
+    <div class="main">
+      <i class="notch"></i><i class="notch"></i><i class="notch"></i>
+      <i class="notch"></i><i class="notch"></i><i class="notch"></i>
+      <i class="notch"></i>
+
+      <div class="red"></div>
+    </div>
+  </div>
+</body>
+</html>

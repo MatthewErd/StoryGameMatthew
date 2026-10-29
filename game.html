@@ -30,6 +30,13 @@
             text-align: left;
         }
 
+        .heading {
+            font-size: 2em;
+            color: #ff4d4d;
+            background-color: #1a1a1a;
+            padding: 1em;
+        }
+
         .card {
             border: 2px solid #444;
             padding: 1em;
@@ -44,11 +51,6 @@
             background-color: #2a0808;
             padding: 5px;
             border: 1px solid #8b0000;
-        }
-
-        h1 {
-            color: #ff4d4d;
-            text-shadow: 1px 1px 2px black;
         }
 
         h2 {
@@ -75,52 +77,43 @@
 </head>
 <body>
     <header class="header-box">
-      <nav>
-            <ul> 
+        <nav>
+            <ul>
                 <li><a href="index.html">Home</a></li>
             </ul>
-            <ul> 
+            <ul>
                 <li><a href="game.html">Play the game</a></li>
             </ul>
-            <ul> 
+            <ul>
                 <li><a href="about.html">About the creator</a></li>
             </ul>
         </nav>
     </header>
 
-    <main class="card">
-    <header class="card">
-        <h1 id="scene-title">  </h1>
-        <h2 id="character-name">  </h2>
-    </header>
-    
-    <section>
-    <p id="scene-text">     </p>
+    <main>
+        <header>
+            <h1 id="scene-title" class="heading"></h1>
+            <h2 id="character-name"></h2>
+        </header>
 
-    </section>
+        <div class="card">
+            <p id="scene-text"></p>
+            <div id="choices-container"></div>
+        </div>
 
-    <section>
-        <div id="choices-container"> </div>
-    </section>   
-        
-    <section>
-        <p> Current HP:</p>
-        <ul>
-            <li id="health-display"> 100</li>
-        </ul>
+        <div class="card">
+            <p>Current HP:</p>
+            <ul>
+                <li id="health-display">100</li>
+            </ul>
 
-        <p> Inventory:</p>
-        <ul>
-            <li id="inventory-display"> </li>
-        </ul>
+            <p>Inventory:</p>
+            <ul>
+                <li id="inventory-display">Empty</li>
+            </ul>
 
-        <p id="message-display"></p>
-    </section>
-
-
+            <p id="message-display"></p>
+        </div>
     </main>
-    <footer>
-
-    </footer>
 </body>
 </html>

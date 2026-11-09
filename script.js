@@ -380,3 +380,7 @@ function unlockBasementDoor() {
     messageDisplay.textContent = "The door will not open. You need to find the key before you can discover what is inside.";
   }
 }
+
+const button = document.createElement("button");
+
+button.className = "btn btn-danger m-2";
